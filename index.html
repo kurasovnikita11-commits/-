@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Квест по административному праву РФ</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Times New Roman', Times, serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            background-color: #f5e9d4;
+            color: #3c2f2f;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%239C927B' fill-opacity='0.15' fill-rule='evenodd'/%3E%3C/svg%3E");
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            touch-action: manipulation;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background-color: #f8f1e5;
+            border: 15px solid #8B7355;
+            border-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M0,0 L100,0 L100,100 L0,100 Z' fill='none' stroke='%235D4037' stroke-width='5'/%3E%3C/svg%3E") 15 stretch;
+            padding: 30px;
+            box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3);
+            margin: 20px 0;
+            position: relative;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 3px double #8B7355;
+            padding-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            color: #5D4037;
+            text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: #6D4C41;
+        }
+        
+        /* Панель кнопок для ВК */
+        .vk-panel {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .vk-btn {
+            background-color: #5D4037;
+            color: #f5e9d4;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            text-decoration: none;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .vk-btn:hover {
+            background-color: #8B7355;
+        }
+        
+        /* Таймер в правом нижнем углу */
+        .timer-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #5D4037;
+            color: #f5e9d4;
+            padding: 12px 18px;
+            border-radius: 8px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+            z-index: 100;
+            border: 2px solid #8B7355;
+            min-width: 140px;
+            text-align: center;
+            transition: all 0.3s ease;
+            display: none;
+        }
+        
+        .timer-container.visible {
+            display: block;
+        }
+        
+        .timer-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #d7ccc8;
+            margin-bottom: 5px;
+        }
+        
+        .game-screen {
+            display: none;
+        }
+        
+        .active {
+            display: block;
+        }
+        
+        .question-container {
+            margin-bottom: 30px;
+        }
+        
+        .question-number {
+            font-size: 1.2rem;
+            color: #8B7355;
+            margin-bottom: 5px;
+        }
+        
+        .question-text {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            line-height: 1.4;
+        }
+        
+        .answers-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .answer-btn {
+            background-color: #D7CCC8;
+            border: 2px solid #8B7355;
+            padding: 18px;
+            text-align: left;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: 5px;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .answer-btn:active {
+            background-color: #BCAAA4;
+            transform: scale(0.98);
+        }
+        
+        .answer-btn.selected {
+            background-color: #8D6E63;
+            color: #f5e9d4;
+            border-color: #5D4037;
+        }
+        
+        .answer-btn.correct {
+            background-color: #4CAF50;
+            color: white;
+            border-color: #2E7D32;
+        }
+        
+        .answer-btn.incorrect {
+            background-color: #F44336;
+            color: white;
+            border-color: #C62828;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            gap: 15px;
+        }
+        
+        .btn {
+            background-color: #5D4037;
+            color: #f5e9d4;
+            border: none;
+            padding: 15px 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border-radius: 5px;
+            flex: 1;
+            min-height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .btn:active {
+            background-color: #8B7355;
+            transform: scale(0.98);
+        }
+        
+        .btn:disabled {
+            background-color: #A1887F;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        
+        .btn:disabled:active {
+            transform: none;
+        }
+        
+        .start-screen {
+            text-align: center;
+        }
+        
+        .intro-text {
+            font-size: 1.3rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        
+        .rules {
+            text-align: left;
+            background-color: #E8E1D5;
+            padding: 20px;
+            border-left: 5px solid #8B7355;
+            margin-bottom: 30px;
+        }
+        
+        .rules h3 {
+            margin-bottom: 10px;
+            color: #5D4037;
+        }
+        
+        .rules ul {
+            padding-left: 20px;
+        }
+        
+        .rules li {
+            margin-bottom: 8px;
+        }
+        
+        .result-screen {
+            text-align: center;
+        }
+        
+        .result-title {
+            font-size: 2rem;
+            color: #5D4037;
+            margin-bottom: 20px;
+        }
+        
+        .score {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #5D4037;
+            margin: 20px 0;
+        }
+        
+        .result-text {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .progress-bar {
+            height: 20px;
+            background-color: #D7CCC8;
+            border-radius: 10px;
+            margin: 30px 0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: #8B7355;
+            width: 0%;
+            transition: width 0.5s;
+        }
+        
+        .feedback {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #E8E1D5;
+            border-radius: 5px;
+            font-style: italic;
+            display: none;
+        }
+        
+        /* Таймер на экране результатов */
+        .result-timer {
+            display: inline-block;
+            background-color: #5D4037;
+            color: #f5e9d4;
+            padding: 12px 18px;
+            border-radius: 8px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 20px auto;
+            border: 2px solid #8B7355;
+            min-width: 140px;
+            text-align: center;
+        }
+        
+        .result-timer-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #d7ccc8;
+            margin-bottom: 5px;
+        }
+        
+        /* Инструкция для ВК */
+        .vk-instruction {
+            background-color: #E8E1D5;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+            border-left: 5px solid #4a76a8;
+        }
+        
+        .vk-instruction h3 {
+            color: #4a76a8;
+            margin-bottom: 15px;
+        }
+        
+        .vk-instruction ol {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .vk-instruction li {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+        
+        .vk-share-link {
+            display: inline-block;
+            background-color: #4a76a8;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+        
+        .vk-share-link:hover {
+            background-color: #5a86b8;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                padding: 20px;
+                border-width: 10px;
+                margin-bottom: 90px;
+                margin-top: 70px;
+            }
+            
+            .vk-panel {
+                top: 10px;
+                right: 10px;
+                left: 10px;
+                flex-direction: row;
+                justify-content: center;
+            }
+            
+            .vk-btn {
+                padding: 8px 12px;
+                font-size: 0.85rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .timer-container {
+                bottom: 20px;
+                right: 20px;
+                left: 20px;
+                width: auto;
+                font-size: 1.4rem;
+                min-width: auto;
+                padding: 10px 15px;
+            }
+            
+            .question-text {
+                font-size: 1.3rem;
+            }
+            
+            .answer-btn {
+                padding: 16px;
+                font-size: 1rem;
+                min-height: 55px;
+            }
+            
+            .btn {
+                padding: 14px 20px;
+                font-size: 1rem;
+                min-height: 50px;
+            }
+            
+            .navigation {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .result-timer {
+                font-size: 1.4rem;
+                min-width: auto;
+                width: 80%;
+                margin: 15px auto;
+            }
+            
+            .intro-text {
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                padding: 15px;
+                margin-bottom: 80px;
+                margin-top: 60px;
+            }
+            
+            h1 {
+                font-size: 1.7rem;
+            }
+            
+            .timer-container {
+                bottom: 15px;
+                right: 15px;
+                left: 15px;
+                font-size: 1.3rem;
+                padding: 8px 12px;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .answer-btn {
+                padding: 14px;
+                font-size: 0.95rem;
+                min-height: 50px;
+            }
+            
+            .btn {
+                padding: 12px 16px;
+                font-size: 0.95rem;
+                min-height: 48px;
+            }
+            
+            .result-timer {
+                font-size: 1.3rem;
+                padding: 10px 15px;
+            }
+        }
+        
+        .watermark {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            color: rgba(93, 64, 55, 0.3);
+            font-size: 0.8rem;
+        }
+        
+        /* QR код для быстрого доступа */
+        .qr-container {
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            display: inline-block;
+        }
+        
+        .qr-code {
+            width: 150px;
+            height: 150px;
+            margin: 10px auto;
+            background: #fff;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <!-- Панель для ВК -->
+    <div class="vk-panel">
+        <button id="share-btn" class="vk-btn">📤 Поделиться</button>
+        <button id="save-btn" class="vk-btn">💾 Сохранить</button>
+        <a href="#instruction" class="vk-btn">📖 Инструкция</a>
+    </div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>Квест по административному праву РФ</h1>
+            <div class="subtitle">Проверьте свои знания в области административного законодательства</div>
+        </div>
+        
+        <!-- Стартовый экран -->
+        <div id="start-screen" class="game-screen active">
+            <div class="start-screen">
+                <p class="intro-text">
+                    Добро пожаловать в квест по административному праву Российской Федерации! 
+                    Вам предстоит ответить на ряд вопросов, касающихся административных правонарушений, 
+                    производства по делам об административных правонарушениях и других аспектов административного права.
+                </p>
+                
+                <div class="rules">
+                    <h3>Правила квеста:</h3>
+                    <ul>
+                        <li>Квест состоит из 10 вопросов по административному праву РФ</li>
+                        <li>На каждый вопрос есть 4 варианта ответа, только один из них верный</li>
+                        <li>Таймер отсчитывает время с момента начала игры</li>
+                        <li>После выбора ответа можно перейти к следующему вопросу</li>
+                        <li>В конце квеста вы увидите свой результат и получите обратную связь</li>
+                    </ul>
+                </div>
+                
+                <button id="start-btn" class="btn" style="max-width: 300px; margin: 20px auto;">
+                    Начать квест
+                </button>
+                
+                <!-- Инструкция для ВК -->
+                <div id="instruction" class="vk-instruction">
+                    <h3>📱 Как поделиться квестом в ВК:</h3>
+                    <ol>
+                        <li>Нажмите кнопку <strong>"💾 Сохранить"</strong> выше</li>
+                        <li>Сохраните этот код на свой компьютер или телефон</li>
+                        <li>Откройте файл в любом браузере</li>
+                        <li>Чтобы поделиться с друзьями:
+                            <ul style="margin-top: 10px; padding-left: 20px;">
+                                <li>Скопируйте весь текст этой страницы</li>
+                                <li>Отправьте его в личном сообщении в ВК</li>
+                                <li>Получатель скопирует текст и сохранит как HTML файл</li>
+                                <li>Или используйте бесплатный хостинг (см. ниже)</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    
+                    <h4>Бесплатные способы публикации:</h4>
+                    <ul style="padding-left: 20px;">
+                        <li><strong>GitHub Pages</strong> - создайте репозиторий и загрузите файл</li>
+                        <li><strong>Netlify Drop</strong> - перетащите файл на сайт netlify.com/drop</li>
+                        <li><strong>Vercel</strong> - загрузите через vercel.com</li>
+                        <li><strong>Google Sites</strong> - создайте сайт и вставьте код</li>
+                    </ul>
+                    
+                    <div style="text-align: center; margin-top: 20px;">
+                        <button id="copy-code" class="vk-share-link" style="margin-right: 10px;">
+                            📋 Скопировать код
+                        </button>
+                        <button id="generate-link" class="vk-share-link">
+                            🔗 Создать ссылку
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Экран с вопросами -->
+        <div id="question-screen" class="game-screen">
+            <div class="question-container">
+                <div class="question-number" id="question-number">Вопрос 1 из 10</div>
+                <div class="question-text" id="question-text"></div>
+                
+                <div class="answers-container" id="answers-container">
+                    <!-- Варианты ответов будут добавлены через JavaScript -->
+                </div>
+                
+                <div class="feedback" id="feedback"></div>
+            </div>
+            
+            <div class="navigation">
+                <button id="prev-btn" class="btn" disabled>Назад</button>
+                <button id="next-btn" class="btn">Следующий вопрос</button>
+            </div>
+        </div>
+        
+        <!-- Экран с результатами -->
+        <div id="result-screen" class="game-screen">
+            <div class="result-screen">
+                <h2 class="result-title">Квест завершен!</h2>
+                <div class="score" id="final-score">0/10</div>
+                
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                
+                <div class="result-text" id="result-text"></div>
+                
+                <!-- Таймер на экране результатов -->
+                <div class="result-timer">
+                    <div class="result-timer-label">Ваше время</div>
+                    <div id="final-time">00:00:00</div>
+                </div>
+                
+                <button id="restart-btn" class="btn" style="max-width: 300px; margin: 20px auto;">
+                    Начать заново
+                </button>
+                
+                <div class="vk-instruction">
+                    <h3>🎉 Поделиться результатом:</h3>
+                    <p>Ваш результат: <strong id="share-score">0/10</strong> за время: <strong id="share-time">00:00:00</strong></p>
+                    <p>Расскажите друзьям о своем результате!</p>
+                    <div style="text-align: center; margin-top: 15px;">
+                        <button id="share-result" class="vk-share-link">
+                            📤 Поделиться результатом
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Таймер в правом нижнем углу -->
+    <div class="timer-container" id="timer-container">
+        <div class="timer-label">Время</div>
+        <div id="timer">00:00:00</div>
+    </div>
+    
+    <div class="watermark">Квест по административному праву РФ</div>
+
+    <script>
+        // Вопросы для квеста
+        const questions = [
+            {
+                question: "Что является основанием административной ответственности?",
+                answers: [
+                    "Наличие состава административного правонарушения",
+                    "Наличие судимости у лица",
+                    "Отсутствие гражданства РФ",
+                    "Достижение возраста 21 года"
+                ],
+                correct: 0
+            },
+            {
+                question: "Каков общий срок давности привлечения к административной ответственности?",
+                answers: [
+                    "1 месяц",
+                    "3 месяца",
+                    "6 месяцев",
+                    "1 год"
+                ],
+                correct: 1
+            },
+            {
+                question: "Кто рассматривает дела об административных правонарушениях, совершенных несовершеннолетними?",
+                answers: [
+                    "Комиссии по делам несовершеннолетних и защите их прав",
+                    "Мировые судьи",
+                    "Районные суды",
+                    "Органы внутренних дел"
+                ],
+                correct: 0
+            },
+            {
+                question: "Какой максимальный срок административного ареста может быть назначен по КоАП РФ?",
+                answers: [
+                    "5 суток",
+                    "15 суток",
+                    "30 суток",
+                    "60 суток"
+                ],
+                correct: 2
+            },
+            {
+                question: "Что такое административное выдворение?",
+                answers: [
+                    "Принудительное перемещение иностранного гражданина за пределы РФ",
+                    "Добровольный выезд из РФ",
+                    "Лишение гражданства РФ",
+                    "Запрет на въезд в определенный регион РФ"
+                ],
+                correct: 0
+            },
+            {
+                question: "Какое из перечисленных наказаний не является административным?",
+                answers: [
+                    "Штраф",
+                    "Исправительные работы",
+                    "Предупреждение",
+                    "Конфискация орудия правонарушения"
+                ],
+                correct: 1
+            },
+            {
+                question: "С какого возраста наступает административная ответственность?",
+                answers: [
+                    "С 14 лет",
+                    "С 16 лет",
+                    "С 18 лет",
+                    "С 21 года"
+                ],
+                correct: 1
+            },
+            {
+                question: "Кто имеет право составлять протоколы об административных правонарушениях?",
+                answers: [
+                    "Только сотрудники полиции",
+                    "Уполномоченные должностные лица",
+                    "Любой гражданин",
+                    "Только судьи"
+                ],
+                correct: 1
+            },
+            {
+                question: "Что такое административное правонарушение?",
+                answers: [
+                    "Преступление небольшой тяжести",
+                    "Противоправное, виновное действие (бездействие), за которое установлена административная ответственность",
+                    "Действие, нарушающее только моральные нормы",
+                    "Любое нарушение установленных правил"
+                ],
+                correct: 1
+            },
+            {
+                question: "Какие меры обеспечения производства по делу об административном правонарушении вы знаете?",
+                answers: [
+                    "Доставление, административное задержание, личный досмотр",
+                    "Заключение под стражу, домашний арест",
+                    "Подписка о невыезде, залог",
+                    "Арест имущества, запрет определенных действий"
+                ],
+                correct: 0
+            }
+        ];
+
+        // Элементы DOM
+        const startScreen = document.getElementById('start-screen');
+        const questionScreen = document.getElementById('question-screen');
+        const resultScreen = document.getElementById('result-screen');
+        const startBtn = document.getElementById('start-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const restartBtn = document.getElementById('restart-btn');
+        const shareBtn = document.getElementById('share-btn');
+        const saveBtn = document.getElementById('save-btn');
+        const copyCodeBtn = document.getElementById('copy-code');
+        const generateLinkBtn = document.getElementById('generate-link');
+        const shareResultBtn = document.getElementById('share-result');
+        const questionNumber = document.getElementById('question-number');
+        const questionText = document.getElementById('question-text');
+        const answersContainer = document.getElementById('answers-container');
+        const feedback = document.getElementById('feedback');
+        const timer = document.getElementById('timer');
+        const finalTime = document.getElementById('final-time');
+        const finalScore = document.getElementById('final-score');
+        const resultText = document.getElementById('result-text');
+        const progressFill = document.getElementById('progress-fill');
+        const timerContainer = document.getElementById('timer-container');
+        const shareScore = document.getElementById('share-score');
+        const shareTime = document.getElementById('share-time');
+
+        // Переменные игры
+        let currentQuestion = 0;
+        let userAnswers = Array(questions.length).fill(null);
+        let score = 0;
+        let startTime;
+        let timerInterval;
+
+        // Таймер
+        function startTimer() {
+            startTime = new Date();
+            timerInterval = setInterval(updateTimer, 1000);
+            timerContainer.classList.add('visible');
+        }
+
+        function updateTimer() {
+            const now = new Date();
+            const diff = new Date(now - startTime);
+            
+            const hours = String(diff.getUTCHours()).padStart(2, '0');
+            const minutes = String(diff.getUTCMinutes()).padStart(2, '0');
+            const seconds = String(diff.getUTCSeconds()).padStart(2, '0');
+            
+            timer.textContent = `${hours}:${minutes}:${seconds}`;
+        }
+
+        function stopTimer() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+            }
+            finalTime.textContent = timer.textContent;
+            shareTime.textContent = timer.textContent;
+        }
+
+        // Начало игры
+        startBtn.addEventListener('click', () => {
+            startScreen.classList.remove('active');
+            questionScreen.classList.add('active');
+            startTimer();
+            loadQuestion(currentQuestion);
+        });
+
+        // Загрузка вопроса
+        function loadQuestion(index) {
+            const question = questions[index];
+            
+            questionNumber.textContent = `Вопрос ${index + 1} из ${questions.length}`;
+            questionText.textContent = question.question;
+            
+            answersContainer.innerHTML = '';
+            question.answers.forEach((answer, i) => {
+                const button = document.createElement('button');
+                button.className = 'answer-btn';
+                if (userAnswers[index] === i) {
+                    button.classList.add('selected');
+                }
+                button.textContent = answer;
+                button.addEventListener('click', () => selectAnswer(i));
+                answersContainer.appendChild(button);
+            });
+            
+            // Обработка кнопок навигации
+            prevBtn.disabled = index === 0;
+            
+            if (index === questions.length - 1) {
+                nextBtn.textContent = 'Завершить квест';
+            } else {
+                nextBtn.textContent = 'Следующий вопрос';
+            }
+            
+            // Скрыть обратную связь
+            feedback.style.display = 'none';
+        }
+
+        // Выбор ответа
+        function selectAnswer(answerIndex) {
+            // Сброс предыдущего выбора
+            const buttons = answersContainer.querySelectorAll('.answer-btn');
+            buttons.forEach(btn => btn.classList.remove('selected'));
+            
+            // Выбор нового ответа
+            buttons[answerIndex].classList.add('selected');
+            userAnswers[currentQuestion] = answerIndex;
+            
+            // Показать обратную связь
+            const correctIndex = questions[currentQuestion].correct;
+            if (answerIndex === correctIndex) {
+                feedback.textContent = "Верно! Это правильный ответ.";
+                feedback.style.backgroundColor = '#E8F5E9';
+                feedback.style.color = '#2E7D32';
+            } else {
+                feedback.textContent = `Неверно. Правильный ответ: ${questions[currentQuestion].answers[correctIndex]}`;
+                feedback.style.backgroundColor = '#FFEBEE';
+                feedback.style.color = '#C62828';
+            }
+            feedback.style.display = 'block';
+        }
+
+        // Навигация
+        prevBtn.addEventListener('click', () => {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion(currentQuestion);
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (userAnswers[currentQuestion] === null) {
+                alert('Пожалуйста, выберите ответ перед переходом к следующему вопросу');
+                return;
+            }
+            
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                loadQuestion(currentQuestion);
+            } else {
+                // Завершение квеста
+                finishQuest();
+            }
+        });
+
+        // Завершение квеста
+        function finishQuest() {
+            // Подсчет результатов
+            score = 0;
+            userAnswers.forEach((answer, index) => {
+                if (answer === questions[index].correct) {
+                    score++;
+                }
+            });
+            
+            // Остановка таймера
+            stopTimer();
+            
+            // Переход на экран результатов
+            questionScreen.classList.remove('active');
+            resultScreen.classList.add('active');
+            
+            // Отображение результатов
+            finalScore.textContent = `${score}/${questions.length}`;
+            shareScore.textContent = `${score}/${questions.length}`;
+            progressFill.style.width = `${(score / questions.length) * 100}%`;
+            
+            // Текст результата
+            let resultMessage = '';
+            if (score === questions.length) {
+                resultMessage = 'Отлично! Вы отлично разбираетесь в административном праве РФ. Все ответы верные!';
+            } else if (score >= questions.length * 0.7) {
+                resultMessage = 'Хороший результат! Вы хорошо знаете административное право, но есть что повторить.';
+            } else if (score >= questions.length * 0.5) {
+                resultMessage = 'Удовлетворительно. Вы знаете основы административного права, но стоит углубить знания.';
+            } else {
+                resultMessage = 'Вам стоит изучить административное право РФ более подробно. Попробуйте еще раз!';
+            }
+            
+            resultText.textContent = resultMessage;
+        }
+
+        // Перезапуск игры
+        restartBtn.addEventListener('click', () => {
+            // Сброс переменных
+            currentQuestion = 0;
+            userAnswers = Array(questions.length).fill(null);
+            score = 0;
+            
+            // Сброс таймера
+            clearInterval(timerInterval);
+            timer.textContent = '00:00:00';
+            timerContainer.classList.remove('visible');
+            
+            // Переход на стартовый экран
+            resultScreen.classList.remove('active');
+            startScreen.classList.add('active');
+        });
+
+        // Функции для ВК
+        // 1. Сохранить файл
+        saveBtn.addEventListener('click', () => {
+            const filename = "Административный_квест.html";
+            const htmlContent = document.documentElement.outerHTML;
+            
+            // Создаем Blob и ссылку для скачивания
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            alert('Файл сохранен как "Административный_квест.html".\n\nЧтобы открыть: сохраните файл и откройте в браузере.');
+        });
+
+        // 2. Скопировать код
+        copyCodeBtn.addEventListener('click', async () => {
+            try {
+                const htmlContent = document.documentElement.outerHTML;
+                await navigator.clipboard.writeText(htmlContent);
+                alert('✅ Весь код квеста скопирован в буфер обмена!\n\nТеперь вы можете отправить его в ВК как текстовое сообщение.\n\nПолучатель должен сохранить текст как файл с расширением .html');
+            } catch (err) {
+                // Fallback для старых браузеров
+                const textArea = document.createElement('textarea');
+                textArea.value = document.documentElement.outerHTML;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                alert('Код скопирован в буфер обмена!');
+            }
+        });
+
+        // 3. Создать ссылку (имитация - на самом деле нужно загрузить на хостинг)
+        generateLinkBtn.addEventListener('click', () => {
+            alert(`🔗 Чтобы создать публичную ссылку на квест:
+
+1. Сохраните файл (кнопка "💾 Сохранить")
+2. Загрузите его на один из бесплатных хостингов:
+
+📌 GitHub Pages (самый простой):
+   - Создайте аккаунт на github.com
+   - Создайте новый репозиторий
+   - Загрузите файл index.html
+   - В настройках включите GitHub Pages
+
+📌 Netlify Drop:
+   - Перейдите на netlify.com/drop
+   - Перетащите сохраненный файл
+   - Получите ссылку сразу
+
+📌 Vercel:
+   - Зарегистрируйтесь на vercel.com
+   - Drag & drop файл
+   - Получите ссылку
+
+📌 Google Sites:
+   - Создайте новый сайт
+   - Вставьте код через "Встраивание"
+   - Опубликуйте сайт`);
+        });
+
+        // 4. Поделиться результатом
+        shareResultBtn.addEventListener('click', () => {
+            const resultText = `🎯 Я прошел квест по административному праву РФ с результатом ${score}/10 за ${finalTime.textContent}!\n\nПопробуй и ты:`;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Квест по административному праву РФ',
+                    text: resultText,
+                    url: window.location.href
+                });
+            } else {
+                alert(`${resultText}\n\nСсылка для прохождения: ${window.location.href}\n\nСкопируйте это сообщение и отправьте друзьям!`);
+            }
+        });
+
+        // 5. Общая кнопка "Поделиться"
+        shareBtn.addEventListener('click', () => {
+            alert(`📤 Как поделиться квестом в ВК:
+
+Вариант 1: 📋 Копирование кода
+- Нажмите "Скопировать код" в инструкции
+- Отправьте код в личном сообщении
+- Получатель сохранит как HTML файл
+
+Вариант 2: 🔗 Публичная ссылка
+- Загрузите файл на GitHub Pages/Netlify
+- Получите ссылку
+- Отправьте ссылку в ВК
+
+Вариант 3: 📁 Архив
+- Сохраните файл
+- Добавьте в архив .zip
+- Отправьте архив в ВК (разрешено)
+
+Проще всего - скопировать код и отправить текстом!`);
+        });
+
+        // Инициализация при загрузке
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Квест по административному праву РФ загружен!');
+            
+            // Проверка на мобильные устройства
+            if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+                console.log('Мобильное устройство обнаружено');
+            }
+        });
+    </script>
+</body>
+</html>
